@@ -1,0 +1,44 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.2.4'
+    id 'io.spring.dependency-management' version '1.1.4'
+}
+
+group = 'dev.danielarrais'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    sourceCompatibility = '17'
+}
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    set('springCloudGcpVersion', "5.1.0")
+    set('springCloudVersion', "2023.0.1")
+}
+
+dependencies {
+    implementation platform('com.google.cloud:libraries-bom:26.37.0')
+    implementation 'com.google.cloud:google-cloud-bigquery'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.testcontainers:junit-jupiter'
+    testImplementation 'org.testcontainers:gcloud'
+    testImplementation 'org.springframework.boot:spring-boot-testcontainers'
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    testCompileOnly 'org.projectlombok:lombok'
+    testAnnotationProcessor 'org.projectlombok:lombok'
+}
+
+dependencyManagement {
+    imports {
+    }
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
